@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
-export function HomePage() {
+import { IState, StoreContext } from "../../store/store";
+
+export function HomePage(): JSX.Element {
+  const store: IState = useContext(StoreContext);
+
+  useEffect(() => {
+    console.log({ store });
+  }, [store]);
+
   return (
     <main>
       <h1>Rick and Morty mini app</h1>

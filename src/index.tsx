@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 
 import { HomePage } from "./pages/Home/HomePage";
 
+import { StoreProvider } from "./store/provider";
+
 import "./css/index.css";
 
 const root = ReactDOM.createRoot(
@@ -11,6 +13,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <HomePage />
+    <StoreProvider>
+      <HomePage />
+    </StoreProvider>
   </React.StrictMode>
 );
