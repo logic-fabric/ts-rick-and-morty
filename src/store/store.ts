@@ -5,9 +5,9 @@ export interface IState {
   favorites: [];
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   episodes: [],
   favorites: [],
 };
 
-export const StoreContext = createContext<IState>(initialState);
+export const StoreContext = createContext<IState | any>(initialState);

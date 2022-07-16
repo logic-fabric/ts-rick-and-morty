@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useReducer } from "react";
 
-import { IState, StoreContext } from "./store";
+import { initialState, StoreContext } from "./store";
+import { reducer } from "./reducer";
 
 export function StoreProvider(props: any): JSX.Element {
-  const store: IState = useContext(StoreContext);
+  const [store, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <StoreContext.Provider value={store}>
+    <StoreContext.Provider value={{ store, dispatch }}>
       {props.children}
     </StoreContext.Provider>
   );

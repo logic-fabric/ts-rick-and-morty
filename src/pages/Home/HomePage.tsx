@@ -1,13 +1,18 @@
 import React, { useContext, useEffect } from "react";
 
-import { IState, StoreContext } from "../../store/store";
+import { StoreContext } from "../../store/store";
+import { fetchAllEpisodesAction } from "../../store/actions";
 
 export function HomePage(): JSX.Element {
-  const store: IState = useContext(StoreContext);
+  const { store, dispatch } = useContext(StoreContext);
 
   useEffect(() => {
+    if (store.episodes.length === 0) {
+      fetchAllEpisodesAction(dispatch);
+    }
+
     console.log({ store });
-  }, [store]);
+  }, [store, dispatch]);
 
   return (
     <main>

@@ -1,15 +1,9 @@
 import { IState } from "./store";
-
-const FETCH_DATA = "FETCH_DATA";
-
-interface IAction {
-  type: string;
-  payload: any;
-}
+import { IAction, FETCH_ALL_EPISODES } from "./actions";
 
 export function reducer(state: IState, action: IAction): IState {
   switch (action.type) {
-    case FETCH_DATA:
+    case FETCH_ALL_EPISODES:
       return {
         ...state,
         episodes: action.payload,
