@@ -2,12 +2,15 @@ import React, { useContext, useEffect } from "react";
 
 import styled from "styled-components";
 
+import { CharacterCard } from "../../components/Card/CharacterCard";
 import { EpisodeCard } from "../../components/Card/EpisodeCard";
 
 import { StoreContext } from "../../store/store";
 import {
   fetchAllCharactersAction,
   fetchAllEpisodesAction,
+  ICharacter,
+  IEpisode,
 } from "../../store/actions";
 
 export function HomePage(): JSX.Element {
@@ -32,19 +35,31 @@ export function HomePage(): JSX.Element {
       <section>
         <h2>Episodes</h2>
 
-        <EpisodesGrid>
-          {store.episodes.map((episode: any) => (
+        <Grid>
+          {store.episodes.map((episode: IEpisode) => (
             <li key={episode.id}>
               <EpisodeCard episode={episode} />
             </li>
           ))}
-        </EpisodesGrid>
+        </Grid>
+      </section>
+
+      <section>
+        <h2>Characters</h2>
+
+        <Grid>
+          {store.characters.map((character: ICharacter) => (
+            <li key={character.id}>
+              <CharacterCard character={character} />
+            </li>
+          ))}
+        </Grid>
       </section>
     </main>
   );
 }
 
-const EpisodesGrid = styled.ol`
+const Grid = styled.ol`
   display: grid;
   grid-gap: 16px;
 
