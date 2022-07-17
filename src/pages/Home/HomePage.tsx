@@ -39,7 +39,6 @@ export function HomePage(): JSX.Element {
 
 const EpisodesGrid = styled.ol`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-gap: 16px;
 
   width: 100%;
@@ -47,4 +46,12 @@ const EpisodesGrid = styled.ol`
   padding: 0;
 
   list-style: none;
+
+  @media (min-width: 800px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;

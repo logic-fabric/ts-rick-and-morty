@@ -60,8 +60,8 @@ html {
   --h1-size: 2rem;
 
   /* Breakpoints and Container max-width: */
-  --small-breakpoint: 900px;
-  --medium-breakpoint: 1340px;
+  --small-breakpoint: 800px;
+  --medium-breakpoint: 1200px;
 
   --small-container-width: 640px;
   --medium-container-width: 1024px;
