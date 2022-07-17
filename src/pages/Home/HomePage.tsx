@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import styled from "styled-components";
 
@@ -16,10 +16,14 @@ import {
 export function HomePage(): JSX.Element {
   const { store, dispatch } = useContext(StoreContext);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (store.characters.length === 0 || store.episodes.length === 0) {
       fetchAllCharactersAction(dispatch);
       fetchAllEpisodesAction(dispatch);
+
+      setIsLoading(false);
     }
 
     console.log({ store });
@@ -43,25 +47,33 @@ export function HomePage(): JSX.Element {
         <section id="episodes">
           <h2>{`${store.episodes.length} episodes}`}</h2>
 
-          <Grid>
-            {store.episodes.map((episode: IEpisode) => (
-              <li key={episode.id}>
-                <EpisodeCard episode={episode} />
-              </li>
-            ))}
-          </Grid>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <Grid>
+              {store.episodes.map((episode: IEpisode) => (
+                <li key={episode.id}>
+                  <EpisodeCard episode={episode} />
+                </li>
+              ))}
+            </Grid>
+          )}
         </section>
 
         <section id="characters">
           <h2>{`${store.characters.length} characters`}</h2>
 
-          <Grid>
-            {store.characters.map((character: ICharacter) => (
-              <li key={character.id}>
-                <CharacterCard character={character} />
-              </li>
-            ))}
-          </Grid>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <Grid>
+              {store.characters.map((character: ICharacter) => (
+                <li key={character.id}>
+                  <CharacterCard character={character} />
+                </li>
+              ))}
+            </Grid>
+          )}
         </section>
       </main>
     </>
@@ -115,6 +127,26 @@ const Grid = styled.ol`
 
   @media (min-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const Loader = styled.div`
+  width: 64px;
+  height: 64px;
+  margin: auto;
+  border: 8px solid var(--primary-500);
+  border-left-color: transparent;
+  border-radius: 50%;
+
+  animation: 500ms linear infinite full-rotation;
+
+  @keyframes full-rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 
