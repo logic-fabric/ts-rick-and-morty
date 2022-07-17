@@ -6,20 +6,19 @@ import { StoreContext } from "../../store/store";
 import { ICharacter } from "../../store/actions";
 
 export function SmallAvatar(props: any): JSX.Element {
-  const { id } = props;
+  const { characterId } = props;
 
   const { store } = useContext(StoreContext);
 
   const character: ICharacter = store.characters.find(
-    (character: ICharacter) => character.id === id
+    (character: ICharacter) => character.id === characterId
   );
 
   return (
     character && (
       <SmallAvatarContainer
-        href={`#character-${id}`}
+        href={`#character-${characterId}`}
         title={character.name}
-        key={id}
       >
         <Avatar src={character.image} alt={character.name} />
       </SmallAvatarContainer>

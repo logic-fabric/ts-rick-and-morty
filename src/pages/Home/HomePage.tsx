@@ -28,9 +28,9 @@ export function HomePage(): JSX.Element {
   return (
     <>
       <AppBar>
-        <h1>
-          <AppTitle href="/">Rick and Morty</AppTitle>
-        </h1>
+        <AppTitle onClick={() => window.scrollTo(0, 0)}>
+          Rick and Morty
+        </AppTitle>
 
         <nav>
           <MainLink href="#episodes">Episodes</MainLink>
@@ -41,7 +41,7 @@ export function HomePage(): JSX.Element {
 
       <main>
         <section id="episodes">
-          <h2>Episodes</h2>
+          <h2>{`${store.episodes.length} episodes}`}</h2>
 
           <Grid>
             {store.episodes.map((episode: IEpisode) => (
@@ -53,7 +53,7 @@ export function HomePage(): JSX.Element {
         </section>
 
         <section id="characters">
-          <h2>Characters</h2>
+          <h2>{`${store.characters.length} characters`}</h2>
 
           <Grid>
             {store.characters.map((character: ICharacter) => (
@@ -81,17 +81,18 @@ const AppBar = styled.header`
 
   color: white;
 
-  background: var(--neutral-700);
+  background: var(--neutral-900);
+  opacity: 0.7;
+  cursor: pointer;
 
   @media (min-width: 800px) {
     padding: 0 2rem;
   }
 `;
 
-const AppTitle = styled.a`
+const AppTitle = styled.h1`
   color: white;
   font-size: var(--h6-size);
-  text-decoration: none;
 
   @media (min-width: 800px) {
     font-size: var(--h2-size);

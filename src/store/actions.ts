@@ -11,6 +11,7 @@ export interface IAction {
 
 export interface ICharacter {
   id: number;
+  episodesIds: number[];
   image: string;
   name: string;
 }
@@ -23,6 +24,14 @@ export interface IEpisode {
   number: number;
   season: number;
 }
+
+const parseIdsInEndpoints = (endpoints: string[]): number[] => {
+  return endpoints.map((url) => {
+    const urlParts = url.split("/");
+
+    return parseInt(urlParts[urlParts.length - 1]);
+  });
+};
 
 export const fetchAllCharactersAction = async (dispatch: Function) => {
   let rawCharacters: any[] = [];
@@ -41,6 +50,7 @@ export const fetchAllCharactersAction = async (dispatch: Function) => {
   for (let rawCharacter of rawCharacters) {
     const character: ICharacter = {
       id: rawCharacter.id,
+      episodesIds: parseIdsInEndpoints(rawCharacter.episode),
       image: rawCharacter.image,
       name: rawCharacter.name,
     };
@@ -51,14 +61,6 @@ export const fetchAllCharactersAction = async (dispatch: Function) => {
   return dispatch({
     type: FETCH_ALL_CHARACTERS,
     payload: { characters },
-  });
-};
-
-const parseCharactersIds = (endpoints: string[]): number[] => {
-  return endpoints.map((url) => {
-    const urlParts = url.split("/");
-
-    return parseInt(urlParts[urlParts.length - 1]);
   });
 };
 
@@ -79,7 +81,7 @@ export const fetchAllEpisodesAction = async (dispatch: Function) => {
   for (let rawEpisode of rawEpisodes) {
     const episode: IEpisode = {
       airDate: rawEpisode.air_date,
-      charactersIds: parseCharactersIds(rawEpisode.characters),
+      charactersIds: parseIdsInEndpoints(rawEpisode.characters),
       id: rawEpisode.id,
       name: rawEpisode.name,
       number: parseInt(rawEpisode.episode.slice(5, 7)),
