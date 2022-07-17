@@ -29,35 +29,77 @@ export function HomePage(): JSX.Element {
   }, [store, dispatch]);
 
   return (
-    <main>
-      <h1>Rick and Morty mini app</h1>
+    <>
+      <AppBar>
+        <h1>
+          <AppTitle href="/">Rick and Morty</AppTitle>
+        </h1>
 
-      <section>
-        <h2>Episodes</h2>
+        <nav>
+          <MainLink href="#episodes">Episodes</MainLink>
 
-        <Grid>
-          {store.episodes.map((episode: IEpisode) => (
-            <li key={episode.id}>
-              <EpisodeCard episode={episode} />
-            </li>
-          ))}
-        </Grid>
-      </section>
+          <MainLink href="#characters">Characters</MainLink>
+        </nav>
+      </AppBar>
 
-      <section>
-        <h2>Characters</h2>
+      <main>
+        <section id="episodes">
+          <h2>Episodes</h2>
 
-        <Grid>
-          {store.characters.map((character: ICharacter) => (
-            <li key={character.id}>
-              <CharacterCard character={character} />
-            </li>
-          ))}
-        </Grid>
-      </section>
-    </main>
+          <Grid>
+            {store.episodes.map((episode: IEpisode) => (
+              <li key={episode.id}>
+                <EpisodeCard episode={episode} />
+              </li>
+            ))}
+          </Grid>
+        </section>
+
+        <section id="characters">
+          <h2>Characters</h2>
+
+          <Grid>
+            {store.characters.map((character: ICharacter) => (
+              <li key={character.id}>
+                <CharacterCard character={character} />
+              </li>
+            ))}
+          </Grid>
+        </section>
+      </main>
+    </>
   );
 }
+const AppBar = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+  max-width: var(--large-container-width);
+  padding: 0 1rem;
+
+  color: white;
+
+  background: var(--neutral-700);
+
+  @media (min-width: 800px) {
+    padding: 0 2rem;
+  }
+`;
+
+const AppTitle = styled.a`
+  color: white;
+  font-size: var(--h6-size);
+  text-decoration: none;
+
+  @media (min-width: 800px) {
+    font-size: var(--h2-size);
+  }
+`;
 
 const Grid = styled.ol`
   display: grid;
@@ -75,5 +117,18 @@ const Grid = styled.ol`
 
   @media (min-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const MainLink = styled.a`
+  margin: 0 0 0 16px;
+  color: white;
+  font-size: var(--sm-size);
+  text-decoration: none;
+
+  @media (min-width: 800px) {
+    margin: 0 0 0 32px;
+
+    font-size: var(--h6-size);
   }
 `;

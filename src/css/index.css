@@ -92,7 +92,6 @@ body {
   max-width: var(--large-container-width);
   margin: auto;
   min-height: 100vh;
-  padding: 0 2rem;
 
   background: var(--neutral-100);
 }
@@ -110,8 +109,16 @@ main {
   align-items: center;
 
   height: 100%;
+  padding: 0 1rem;
+}
+
+@media (min-width: 800px) {
+  main {
+    padding: 0 2rem;
+  }
 }
 
 section {
   width: 100%;
+  padding: 2rem 0 0 0;
 }
