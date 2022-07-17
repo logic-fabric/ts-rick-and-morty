@@ -17,7 +17,19 @@ export function CharacterCard(props: any): JSX.Element {
         <Avatar src={character.image} alt={character.name} />
       </AvatarContainer>
 
+      {character.healthStatus === "dead" && (
+        <SkullIcon
+          className="fa-solid fa-skull-crossbones"
+          title={character.healthStatus}
+        />
+      )}
+
       <CharacterTitle>{character.name}</CharacterTitle>
+
+      <p>
+        <b>Health status: </b>
+        {character.healthStatus}
+      </p>
 
       <div>
         <EpisodesApparitions>
@@ -57,6 +69,8 @@ const AvatarContainer = styled.div`
 `;
 
 const CharacterCardContainer = styled.article`
+  position: relative;
+
   padding: 16px 32px;
   border-radius: 8px;
 
@@ -85,4 +99,18 @@ const EpisodesGrid = styled.ul`
   overflow: auto;
 
   list-style: none;
+`;
+
+const SkullIcon = styled.div`
+  position: absolute;
+  top: 16px;
+  left: calc(50% + 32px);
+
+  padding: 16px;
+  border-radius: 50%;
+
+  color: white;
+  font-size: 24px;
+
+  background: var(--danger-700);
 `;
