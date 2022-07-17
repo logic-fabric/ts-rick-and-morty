@@ -1,13 +1,13 @@
 import { createContext } from "react";
 
 export interface IState {
+  characters: [];
   episodes: [];
-  favorites: [];
 }
 
 export const initialState: IState = {
+  characters: [],
   episodes: [],
-  favorites: [],
 };
 
 export const StoreContext = createContext<IState | any>(initialState);

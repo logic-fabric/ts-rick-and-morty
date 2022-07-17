@@ -5,12 +5,19 @@ import styled from "styled-components";
 import { EpisodeCard } from "../../components/Card/EpisodeCard";
 
 import { StoreContext } from "../../store/store";
-import { fetchAllEpisodesAction } from "../../store/actions";
+import {
+  fetchAllCharactersAction,
+  fetchAllEpisodesAction,
+} from "../../store/actions";
 
 export function HomePage(): JSX.Element {
   const { store, dispatch } = useContext(StoreContext);
 
   useEffect(() => {
+    if (store.characters.length === 0) {
+      fetchAllCharactersAction(dispatch);
+    }
+
     if (store.episodes.length === 0) {
       fetchAllEpisodesAction(dispatch);
     }
