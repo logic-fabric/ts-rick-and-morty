@@ -11,9 +11,9 @@ export function EpisodeCard(props: any): JSX.Element {
     <EpisodeCardContainer>
       <EpisodeTitle>{episode.name}</EpisodeTitle>
 
-      <EpisodeSeasonAndPosition>
-        {`S${episode.season} E${episode.position}`}
-      </EpisodeSeasonAndPosition>
+      <EpisodeSeasonAndNumber>
+        {`S${episode.season} E${episode.number}`}
+      </EpisodeSeasonAndNumber>
 
       <EpisodeAirDate>{`Air date: ${episode.airDate}`}</EpisodeAirDate>
     </EpisodeCardContainer>
@@ -33,7 +33,7 @@ const EpisodeCardContainer = styled.article`
   background: white;
 `;
 
-const EpisodeSeasonAndPosition = styled.p`
+const EpisodeSeasonAndNumber = styled.p`
   margin: 0;
 
   font-weight: 700;

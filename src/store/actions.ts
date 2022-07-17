@@ -19,7 +19,7 @@ export interface IEpisode {
   airDate: string;
   id: number;
   name: string;
-  position: number;
+  number: number;
   season: number;
 }
 
@@ -72,7 +72,7 @@ export const fetchAllEpisodesAction = async (dispatch: Function) => {
       airDate: rawEpisode.air_date,
       id: rawEpisode.id,
       name: rawEpisode.name,
-      position: parseInt(rawEpisode.episode.slice(5, 7)),
+      number: parseInt(rawEpisode.episode.slice(5, 7)),
       season: parseInt(rawEpisode.episode.slice(1, 4)),
     };
 
