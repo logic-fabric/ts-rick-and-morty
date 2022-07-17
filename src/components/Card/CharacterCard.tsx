@@ -8,7 +8,7 @@ export function CharacterCard(props: any): JSX.Element {
   const character: ICharacter = props.character;
 
   return (
-    <CharacterCardContainer>
+    <CharacterCardContainer id={`character-${character.id}`}>
       <AvatarContainer>
         <Avatar src={character.image} alt={character.name} />
       </AvatarContainer>

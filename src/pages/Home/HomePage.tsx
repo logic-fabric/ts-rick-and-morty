@@ -17,11 +17,8 @@ export function HomePage(): JSX.Element {
   const { store, dispatch } = useContext(StoreContext);
 
   useEffect(() => {
-    if (store.characters.length === 0) {
+    if (store.characters.length === 0 || store.episodes.length === 0) {
       fetchAllCharactersAction(dispatch);
-    }
-
-    if (store.episodes.length === 0) {
       fetchAllEpisodesAction(dispatch);
     }
 

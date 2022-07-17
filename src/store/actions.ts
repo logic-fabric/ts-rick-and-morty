@@ -17,6 +17,7 @@ export interface ICharacter {
 
 export interface IEpisode {
   airDate: string;
+  charactersIds: number[];
   id: number;
   name: string;
   number: number;
@@ -53,6 +54,14 @@ export const fetchAllCharactersAction = async (dispatch: Function) => {
   });
 };
 
+const parseCharactersIds = (endpoints: string[]): number[] => {
+  return endpoints.map((url) => {
+    const urlParts = url.split("/");
+
+    return parseInt(urlParts[urlParts.length - 1]);
+  });
+};
+
 export const fetchAllEpisodesAction = async (dispatch: Function) => {
   let rawEpisodes: any[] = [];
   let url: string = GET_ALL_EPISODES_URL;
@@ -70,6 +79,7 @@ export const fetchAllEpisodesAction = async (dispatch: Function) => {
   for (let rawEpisode of rawEpisodes) {
     const episode: IEpisode = {
       airDate: rawEpisode.air_date,
+      charactersIds: parseCharactersIds(rawEpisode.characters),
       id: rawEpisode.id,
       name: rawEpisode.name,
       number: parseInt(rawEpisode.episode.slice(5, 7)),
