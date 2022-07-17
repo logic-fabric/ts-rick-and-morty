@@ -12,6 +12,7 @@ export interface IAction {
 export interface ICharacter {
   id: number;
   episodesIds: number[];
+  gender: string;
   healthStatus: string;
   image: string;
   name: string;
@@ -52,6 +53,7 @@ export const fetchAllCharactersAction = async (dispatch: Function) => {
     const character: ICharacter = {
       id: rawCharacter.id,
       episodesIds: parseIdsInEndpoints(rawCharacter.episode),
+      gender: rawCharacter.gender.toLowerCase(),
       healthStatus: rawCharacter.status.toLowerCase(),
       image: rawCharacter.image,
       name: rawCharacter.name,

@@ -6,6 +6,10 @@ import { EpisodeBadge } from "../Badge/EpisodeBadge";
 
 import { ICharacter } from "../../store/actions";
 
+type GenderElement = {
+  gender: string;
+};
+
 export function CharacterCard(props: any): JSX.Element {
   const character: ICharacter = props.character;
 
@@ -17,6 +21,20 @@ export function CharacterCard(props: any): JSX.Element {
         <Avatar src={character.image} alt={character.name} />
       </AvatarContainer>
 
+      <GenderIcon
+        className={`fa-solid fa-${
+          character.gender === "female"
+            ? "venus"
+            : character.gender === "genderless"
+            ? "genderless"
+            : character.gender === "male"
+            ? "mars"
+            : "circle-question"
+        }`}
+        title={character.gender}
+        gender={character.gender}
+      />
+
       {character.healthStatus === "dead" && (
         <SkullIcon
           className="fa-solid fa-skull-crossbones"
@@ -25,6 +43,11 @@ export function CharacterCard(props: any): JSX.Element {
       )}
 
       <CharacterTitle>{character.name}</CharacterTitle>
+
+      <p>
+        <b>Gender: </b>
+        {character.gender}
+      </p>
 
       <p>
         <b>Health status: </b>
@@ -84,6 +107,7 @@ const CharacterTitle = styled.h3`
 `;
 
 const EpisodesApparitions = styled.p`
+  margin: 2rem 0 1rem 0;
   font-weight: 700;
 `;
 
@@ -101,12 +125,35 @@ const EpisodesGrid = styled.ul`
   list-style: none;
 `;
 
+const GenderIcon = styled.div<GenderElement>`
+  position: absolute;
+  top: 16px;
+  left: calc(50% - 96px);
+
+  padding: 16px;
+  border: 2px solid white;
+  border-radius: 50%;
+
+  color: white;
+  font-size: 24px;
+
+  background: 
+    ${(props) =>
+      props.gender === "female"
+        ? "var(--danger-300)"
+        : props.gender === "male"
+        ? "var(--primary-500)"
+        : "var(--neutral-500)"};
+  );
+`;
+
 const SkullIcon = styled.div`
   position: absolute;
   top: 16px;
-  left: calc(50% + 32px);
+  left: calc(50% + 48px);
 
   padding: 16px;
+  border: 2px solid white;
   border-radius: 50%;
 
   color: white;
