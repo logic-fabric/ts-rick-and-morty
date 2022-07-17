@@ -20,7 +20,7 @@ export function SmallAvatar(props: any): JSX.Element {
         href={`#character-${characterId}`}
         title={character.name}
       >
-        <Avatar src={character.image} alt={character.name} />
+        <Avatar src={character.image} alt={character.name} loading="lazy" />
       </SmallAvatarContainer>
     )
   );

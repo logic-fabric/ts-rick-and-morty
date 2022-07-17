@@ -18,7 +18,7 @@ export function CharacterCard(props: any): JSX.Element {
   return (
     <CharacterCardContainer id={`character-${character.id}`}>
       <AvatarContainer>
-        <Avatar src={character.image} alt={character.name} />
+        <Avatar src={character.image} alt={character.name} loading="lazy" />
       </AvatarContainer>
 
       <GenderIcon
