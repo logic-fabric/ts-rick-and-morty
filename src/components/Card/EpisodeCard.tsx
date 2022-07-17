@@ -2,19 +2,43 @@ import React from "react";
 
 import styled from "styled-components";
 
+import { IEpisode } from "../../store/actions";
+
 export function EpisodeCard(props: any): JSX.Element {
-  const { episode } = props;
+  const episode: IEpisode = props.episode;
 
   return (
-    <CardContainer>
-      <h3>{episode.name}</h3>
-    </CardContainer>
+    <EpisodeCardContainer>
+      <EpisodeTitle>{episode.name}</EpisodeTitle>
+
+      <EpisodeSeasonAndPosition>
+        {`S${episode.season} E${episode.position}`}
+      </EpisodeSeasonAndPosition>
+
+      <EpisodeAirDate>{`Air date: ${episode.airDate}`}</EpisodeAirDate>
+    </EpisodeCardContainer>
   );
 }
 
-const CardContainer = styled.article`
-  padding: 32px;
+const EpisodeAirDate = styled.p`
+  margin: 0.5rem 0;
+
+  font-size: var(--xs-size);
+`;
+
+const EpisodeCardContainer = styled.article`
+  padding: 16px 32px;
   border-radius: 8px;
 
   background: white;
+`;
+
+const EpisodeSeasonAndPosition = styled.p`
+  margin: 0;
+
+  font-weight: 700;
+`;
+
+const EpisodeTitle = styled.h3`
+  margin: 0.75rem 0;
 `;

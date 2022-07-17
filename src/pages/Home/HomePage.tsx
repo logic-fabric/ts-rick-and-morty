@@ -27,7 +27,9 @@ export function HomePage(): JSX.Element {
 
         <EpisodesGrid>
           {store.episodes.map((episode: any) => (
-            <EpisodeCard episode={episode} key={episode.id} />
+            <li key={episode.id}>
+              <EpisodeCard episode={episode} />
+            </li>
           ))}
         </EpisodesGrid>
       </section>
@@ -35,10 +37,14 @@ export function HomePage(): JSX.Element {
   );
 }
 
-const EpisodesGrid = styled.div`
+const EpisodesGrid = styled.ol`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 16px;
 
   width: 100%;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
 `;

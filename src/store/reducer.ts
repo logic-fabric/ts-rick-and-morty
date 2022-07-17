@@ -1,5 +1,5 @@
 import { IState } from "./store";
-import { IAction, FETCH_ALL_EPISODES } from "./actions";
+import { FETCH_ALL_EPISODES, IAction } from "./actions";
 
 export function reducer(state: IState, action: IAction): IState {
   switch (action.type) {
