@@ -7,11 +7,15 @@ import { SmallAvatar } from "../Badge/SmallAvatar";
 import { StoreContext } from "../../store/store";
 import { IEpisode, LIKE_EPISODE, UNLIKE_EPISODE } from "../../store/actions";
 
+type isLikedElement = {
+  isLiked: boolean;
+};
+
 export function EpisodeCard(props: any): JSX.Element {
   const episode: IEpisode = props.episode;
   const { store, dispatch } = useContext(StoreContext);
 
-  const isLiked: Boolean = store.likedEpisodes.has(episode.id);
+  const isLiked: boolean = store.likedEpisodes.has(episode.id);
 
   return (
     <EpisodeCardContainer id={`episode-${episode.id}`}>
@@ -20,6 +24,7 @@ export function EpisodeCard(props: any): JSX.Element {
       <EpisodeTitle>{episode.name}</EpisodeTitle>
 
       <LikeButton
+        isLiked={isLiked}
         onClick={() => {
           if (isLiked) {
             dispatch({
@@ -124,7 +129,7 @@ const EpisodeTitle = styled.h3`
   margin: 0.75rem 0;
 `;
 
-const LikeButton = styled.button`
+const LikeButton = styled.button<isLikedElement>`
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
@@ -141,12 +146,15 @@ const LikeButton = styled.button`
   opacity: 0.6;
 
   cursor: pointer;
+  transform: ${(props) =>
+    props.isLiked ? "scale(1.75) rotate(15deg)" : "none"};
 
   transition: all 300ms;
 
   &:hover {
     opacity: 0.8;
-    transform: scale(1.05);
+    transform: ${(props) =>
+      props.isLiked ? "scale(1.75) rotate(15deg)" : "scale(1.05)"};
   }
 `;
 
