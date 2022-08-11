@@ -3,9 +3,6 @@ export const FETCH_ALL_EPISODES = "FETCH_ALL_EPISODES";
 export const LIKE_EPISODE = "LIKE_EPISODE";
 export const UNLIKE_EPISODE = "UNLIKE_EPISODE";
 
-const GET_ALL_CHARACTERS_URL = "https://rickandmortyapi.com/api/character";
-const GET_ALL_EPISODES_URL = "https://rickandmortyapi.com/api/episode";
-
 export interface IAction {
   type: string;
   payload: any;
@@ -28,6 +25,9 @@ export interface IEpisode {
   number: number;
   season: number;
 }
+
+const GET_ALL_CHARACTERS_URL = "https://rickandmortyapi.com/api/character";
+const GET_ALL_EPISODES_URL = "https://rickandmortyapi.com/api/episode";
 
 const parseIdsInEndpoints = (endpoints: string[]): number[] => {
   return endpoints.map((url) => {

@@ -54,19 +54,17 @@ export function CharacterCard(props: any): JSX.Element {
         {character.healthStatus}
       </p>
 
-      <div>
-        <EpisodesApparitions>
-          {`This character appears in ${
-            episodesQty === 1 ? "only one" : episodesQty
-          } episode${episodesQty === 1 ? "" : "s"}:`}
-        </EpisodesApparitions>
+      <EpisodesApparitions>
+        {`This character appears in ${
+          episodesQty === 1 ? "only one" : episodesQty
+        } episode${episodesQty === 1 ? "" : "s"}:`}
+      </EpisodesApparitions>
 
-        <EpisodesGrid>
-          {character.episodesIds.map((id) => (
-            <EpisodeBadge episodeId={id} key={id} />
-          ))}
-        </EpisodesGrid>
-      </div>
+      <EpisodesGrid>
+        {character.episodesIds.map((id) => (
+          <EpisodeBadge episodeId={id} key={id} />
+        ))}
+      </EpisodesGrid>
     </CharacterCardContainer>
   );
 }
@@ -101,7 +99,7 @@ const CharacterCardContainer = styled.article`
 `;
 
 const CharacterTitle = styled.h3`
-  margin: 1.5rem 0 0.75rem 0;
+  margin: 1.5rem 0;
 
   text-align: center;
 `;

@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import styled from "styled-components";
 
 import { SmallAvatar } from "../Badge/SmallAvatar";
 
-import { IEpisode } from "../../store/actions";
+import { StoreContext } from "../../store/store";
+import { IEpisode, LIKE_EPISODE, UNLIKE_EPISODE } from "../../store/actions";
 
 export function EpisodeCard(props: any): JSX.Element {
   const episode: IEpisode = props.episode;
+  const { store, dispatch } = useContext(StoreContext);
+
+  const isLiked: Boolean = store.likedEpisodes.has(episode.id);
 
   return (
     <EpisodeCardContainer id={`episode-${episode.id}`}>
@@ -15,23 +19,41 @@ export function EpisodeCard(props: any): JSX.Element {
 
       <EpisodeTitle>{episode.name}</EpisodeTitle>
 
+      <LikeButton
+        onClick={() => {
+          if (isLiked) {
+            dispatch({
+              type: UNLIKE_EPISODE,
+              payload: { id: episode.id },
+            });
+          } else {
+            dispatch({
+              type: LIKE_EPISODE,
+              payload: { id: episode.id },
+            });
+          }
+        }}
+      >
+        <LikeIcon
+          className={isLiked ? "fa-solid fa-heart" : "fa-regular fa-heart"}
+        />
+      </LikeButton>
+
       <EpisodeSeasonAndNumber>
         {`Season ${episode.season} - Episode ${episode.number}`}
       </EpisodeSeasonAndNumber>
 
       <EpisodeAirDate>{`Air date: ${episode.airDate}`}</EpisodeAirDate>
 
-      <div>
-        <CharactersAppearing>
-          {`${episode.charactersIds.length} characters appearing:`}
-        </CharactersAppearing>
+      <CharactersAppearing>
+        {`${episode.charactersIds.length} characters appearing:`}
+      </CharactersAppearing>
 
-        <CharactersGrid>
-          {episode.charactersIds.map((id) => (
-            <SmallAvatar characterId={id} key={id} />
-          ))}
-        </CharactersGrid>
-      </div>
+      <CharactersGrid>
+        {episode.charactersIds.map((id) => (
+          <SmallAvatar characterId={id} key={id} />
+        ))}
+      </CharactersGrid>
     </EpisodeCardContainer>
   );
 }
@@ -73,14 +95,14 @@ const EpisodeCardContainer = styled.article`
 
 const EpisodeId = styled.div`
   position: absolute;
-  top: 16px;
-  left: -24px;
+  top: 1rem;
+  left: -1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   margin: auto;
   border-radius: 8px;
   overflow: hidden;
@@ -100,4 +122,35 @@ const EpisodeSeasonAndNumber = styled.p`
 
 const EpisodeTitle = styled.h3`
   margin: 0.75rem 0;
+`;
+
+const LikeButton = styled.button`
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+
+  background: var(--danger-100);
+  opacity: 0.6;
+
+  cursor: pointer;
+
+  transition: all 300ms;
+
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+`;
+
+const LikeIcon = styled.div`
+  color: var(--danger-700);
+  font-size: 1.5rem;
 `;
