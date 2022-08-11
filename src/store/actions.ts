@@ -1,5 +1,7 @@
 export const FETCH_ALL_CHARACTERS = "FETCH_ALL_CHARACTERS";
 export const FETCH_ALL_EPISODES = "FETCH_ALL_EPISODES";
+export const LIKE_EPISODE = "LIKE_EPISODE";
+export const UNLIKE_EPISODE = "UNLIKE_EPISODE";
 
 const GET_ALL_CHARACTERS_URL = "https://rickandmortyapi.com/api/character";
 const GET_ALL_EPISODES_URL = "https://rickandmortyapi.com/api/episode";
