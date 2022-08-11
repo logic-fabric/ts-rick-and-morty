@@ -45,7 +45,7 @@ export function HomePage(): JSX.Element {
 
       <main>
         <section id="episodes">
-          <h2>{`${store.episodes.length} episodes}`}</h2>
+          <h2>{`${store.episodes.length} episodes`}</h2>
 
           {isLoading ? (
             <Loader />
@@ -113,7 +113,7 @@ const AppTitle = styled.h1`
 
 const Grid = styled.ol`
   display: grid;
-  grid-gap: 16px;
+  grid-gap: 32px;
 
   width: 100%;
   margin: 0;

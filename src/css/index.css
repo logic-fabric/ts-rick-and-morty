@@ -76,6 +76,7 @@ html {
   font-weight: 400;
 
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 *,

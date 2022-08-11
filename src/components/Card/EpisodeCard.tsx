@@ -74,12 +74,12 @@ const EpisodeCardContainer = styled.article`
 const EpisodeId = styled.div`
   position: absolute;
   top: 16px;
-  left: -8px;
+  left: -24px;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 32px;
+  width: 48px;
   height: 48px;
   margin: auto;
   border-radius: 8px;
