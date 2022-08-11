@@ -54,11 +54,15 @@ export function EpisodeCard(props: any): JSX.Element {
         {`${episode.charactersIds.length} characters appearing:`}
       </CharactersAppearing>
 
-      <CharactersGrid>
-        {episode.charactersIds.map((id) => (
-          <SmallAvatar characterId={id} key={id} />
-        ))}
-      </CharactersGrid>
+      {store.characters.length === 0 ? (
+        <Loader />
+      ) : (
+        <CharactersGrid>
+          {episode.charactersIds.map((id) => (
+            <SmallAvatar characterId={id} key={id} />
+          ))}
+        </CharactersGrid>
+      )}
     </EpisodeCardContainer>
   );
 }
@@ -75,7 +79,7 @@ const CharactersGrid = styled.ul`
   grid-gap: 8px;
 
   width: 100%;
-  max-height: 160px;
+  height: 160px;
   margin: 0 0 1rem 0;
   padding: 0;
   overflow: auto;
@@ -126,6 +130,7 @@ const EpisodeSeasonAndNumber = styled.p`
 `;
 
 const EpisodeTitle = styled.h3`
+  width: calc(100% - 4rem);
   margin: 0.75rem 0;
 `;
 
@@ -161,4 +166,24 @@ const LikeButton = styled.button<isLikedElement>`
 const LikeIcon = styled.div`
   color: var(--danger-700);
   font-size: 1.5rem;
+`;
+
+const Loader = styled.div`
+  width: 64px;
+  height: 64px;
+  margin: 68px auto;
+  border: 8px solid var(--primary-500);
+  border-left-color: transparent;
+  border-radius: 50%;
+
+  animation: 500ms linear infinite full-rotation;
+
+  @keyframes full-rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;

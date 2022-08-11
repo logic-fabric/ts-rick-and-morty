@@ -64,7 +64,7 @@ export const fetchAllCharactersAction = async (dispatch: Function) => {
     characters.push(character);
   }
 
-  return dispatch({
+  dispatch({
     type: FETCH_ALL_CHARACTERS,
     payload: { characters },
   });
@@ -97,7 +97,7 @@ export const fetchAllEpisodesAction = async (dispatch: Function) => {
     episodes.push(episode);
   }
 
-  return dispatch({
+  dispatch({
     type: FETCH_ALL_EPISODES,
     payload: { episodes },
   });
