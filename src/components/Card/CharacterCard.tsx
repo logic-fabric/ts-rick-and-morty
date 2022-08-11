@@ -21,25 +21,24 @@ export function CharacterCard(props: any): JSX.Element {
         <Avatar src={character.image} alt={character.name} loading="lazy" />
       </AvatarContainer>
 
-      <GenderIcon
-        className={`fa-solid fa-${
-          character.gender === "female"
-            ? "venus"
-            : character.gender === "genderless"
-            ? "genderless"
-            : character.gender === "male"
-            ? "mars"
-            : "circle-question"
-        }`}
-        title={character.gender}
-        gender={character.gender}
-      />
+      <GenderIcon gender={character.gender} title={character.gender}>
+        <div
+          className={`fa-solid ${
+            character.gender === "female"
+              ? "fa-venus"
+              : character.gender === "genderless"
+              ? "fa-genderless"
+              : character.gender === "male"
+              ? "fa-mars"
+              : "fa-circle-question"
+          }`}
+        />
+      </GenderIcon>
 
       {character.healthStatus === "dead" && (
-        <SkullIcon
-          className="fa-solid fa-skull-crossbones"
-          title={character.healthStatus}
-        />
+        <SkullIcon title={character.healthStatus}>
+          <div className="fa-solid fa-skull-crossbones" />
+        </SkullIcon>
       )}
 
       <CharacterTitle>{character.name}</CharacterTitle>
@@ -127,7 +126,12 @@ const GenderIcon = styled.div<GenderElement>`
   position: absolute;
   top: 16px;
   left: calc(50% - 96px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  width: 64px;
+  height: 64px;
   padding: 16px;
   border: 2px solid white;
   border-radius: 50%;
@@ -149,7 +153,12 @@ const SkullIcon = styled.div`
   position: absolute;
   top: 16px;
   left: calc(50% + 48px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  width: 64px;
+  height: 64px;
   padding: 16px;
   border: 2px solid white;
   border-radius: 50%;
