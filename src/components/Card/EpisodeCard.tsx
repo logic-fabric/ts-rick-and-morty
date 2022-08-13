@@ -79,7 +79,7 @@ const CharactersGrid = styled.ul`
   grid-gap: 8px;
 
   width: 100%;
-  height: 160px;
+  max-height: 160px;
   margin: 0 0 1rem 0;
   padding: 0;
   overflow: auto;
